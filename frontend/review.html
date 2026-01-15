@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Certificates | NDU CERTILOG</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body class="review-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <i class="fas fa-certificate"></i>
+                <h1>NDU <span>CERTILOG</span></h1>
+            </div>
+        </div>
+        
+        <div class="nav-center">
+            <div class="role-badge admin-badge">
+                <i class="fas fa-user-shield"></i>
+                <span>Admin Review Panel</span>
+            </div>
+            <div class="admin-stats">
+                <div class="stat-item pending-review">
+                    <i class="fas fa-clock"></i>
+                    <span id="pendingReviewCount">0</span>
+                    <small>Pending Review</small>
+                </div>
+                <div class="stat-item reviewed-today">
+                    <i class="fas fa-check-double"></i>
+                    <span id="reviewedToday">0</span>
+                    <small>Reviewed Today</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=DC3545&color=fff" alt="Admin" class="avatar">
+                <div class="user-info">
+                    <strong>Admin User</strong>
+                    <small>Administrator</small>
+                </div>
+                
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            
+                <a href="review.html" class="menu-item active">
+                    <i class="fas fa-check-double"></i>
+                    <span>Review Certificates</span>
+                    <span class="badge" id="pendingBadge">0</span>
+                </a>
+                
+            <div class="filter-section">
+                <h4><i class="fas fa-filter"></i> Filters</h4>
+                <select id="statusFilter" class="filter-select">
+                    <option value="all">All Status</option>
+                    <option value="pending" selected>Pending Review</option>
+                    <option value="verified">Verified</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+                
+                <select id="userTypeFilter" class="filter-select">
+                    <option value="all">All Users</option>
+                    <option value="student">Students</option>
+                    <option value="faculty">Faculty</option>
+                </select>
+                
+                <select id="dateFilter" class="filter-select">
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="all">All Time</option>
+                </select>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="review-header">
+                <h2><i class="fas fa-check-double"></i> Certificate Review Panel</h2>
+                <p class="subtitle">Review and verify certificates uploaded by users</p>
+                
+                <div class="action-buttons">
+                    <button class="btn-refresh" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button class="btn-bulk-approve" id="bulkApproveBtn">
+                        <i class="fas fa-check-double"></i> Bulk Approve Selected
+                    </button>
+                </div>
+            </div>
+
+            <!-- Certificate List -->
+            <div class="certificate-list" id="certificateList">
+                <!-- Certificate items will be dynamically loaded here -->
+                <div class="loading-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading certificates for review...</p>
+                </div>
+            </div>
+
+            <!-- Certificate Detail Modal -->
+            <div class="modal" id="detailModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-file-certificate"></i> Certificate Details</h3>
+                        <button class="close-modal" id="closeModal">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="detail-grid">
+                            <div class="certificate-preview-large">
+                                <img id="modalCertificateImage" src="" alt="Certificate">
+                            </div>
+                            
+                            <div class="certificate-details">
+                                <div class="detail-section">
+                                    <h4><i class="fas fa-info-circle"></i> Certificate Information</h4>
+                                    <table class="detail-table">
+                                        <tr>
+                                            <td><i class="fas fa-file-signature"></i> Certificate Name:</td>
+                                            <td id="modalCertName">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-user"></i> Uploaded By:</td>
+                                            <td id="modalUploadedBy">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-university"></i> Issuing Authority:</td>
+                                            <td id="modalIssuingAuthority">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-calendar-alt"></i> Issue Date:</td>
+                                            <td id="modalIssueDate">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-tag"></i> Certificate Type:</td>
+                                            <td id="modalCertType">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-clock"></i> Upload Date:</td>
+                                            <td id="modalUploadDate">-</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+                                <div class="detail-section">
+                                    <h4><i class="fas fa-user-graduate"></i> User Information</h4>
+                                    <table class="detail-table">
+                                        <tr>
+                                            <td><i class="fas fa-id-card"></i> User ID:</td>
+                                            <td id="modalUserId">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-user-tag"></i> Role:</td>
+                                            <td id="modalUserRole">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-building"></i> Department:</td>
+                                            <td id="modalDepartment">-</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+                                <div class="detail-section">
+                                    <h4><i class="fas fa-edit"></i> AI Extracted Text</h4>
+                                    <div class="extracted-text" id="modalExtractedText">
+                                        No extracted text available
+                                    </div>
+                                </div>
+                                
+                                <div class="detail-section">
+                                    <h4><i class="fas fa-sticky-note"></i> Admin Notes</h4>
+                                    <textarea id="adminNotes" rows="3" placeholder="Add notes for the user (optional)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button class="btn-reject" id="rejectBtn">
+                            <i class="fas fa-times"></i> Reject Certificate
+                        </button>
+                        <button class="btn-verify" id="verifyBtn">
+                            <i class="fas fa-check"></i> Verify Certificate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/review.js"></script>
+</body>
+</html>

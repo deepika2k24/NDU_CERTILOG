@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | NDU CERTILOG</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <i class="fas fa-certificate"></i>
+                <h1>NDU <span>CERTILOG</span></h1>
+            </div>
+        </div>
+        
+        <div class="nav-center">
+            <div class="role-badge" id="roleBadge">
+                <i class="fas fa-user-tag"></i>
+                <span>Loading...</span>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <i class="fas fa-file-upload"></i>
+                    <span id="uploadCount">0</span>
+                    <small>Uploads</small>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="verifiedCount">0</span>
+                    <small>Verified</small>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-clock"></i>
+                    <span id="pendingCount">0</span>
+                    <small>Pending</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-right">
+    <div class="user-profile" id="profileBtn">
+        <img src="https://ui-avatars.com/api/?name=User&background=4A6FA5&color=fff" alt="User" class="avatar" id="userAvatar">
+        <div class="user-info">
+            <strong id="userName">Loading...</strong>
+            <small id="userRole">Loading...</small>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Modal should be outside user-info -->
+<div class="profile-modal" id="profileModal">
+  <div class="profile-card">
+    <h3>My Profile</h3>
+
+    <p><strong>Name:</strong> <span id="pName"></span></p>
+    <p><strong>USN:</strong> <span id="pUsn"></span></p>
+    <p><strong>Email:</strong> <span id="pEmail"></span></p>
+    <p><strong>Role:</strong> <span id="pRole"></span></p>
+    <p><strong>Department:</strong> <span id="pDept"></span></p>
+    <p><strong>Program:</strong> <span id="pProgram"></span></p>
+    <p><strong>Semester:</strong> <span id="pSem"></span></p>
+    <p><strong>Status:</strong> <span id="pStatus"></span></p>
+
+    <button id="closeProfile">Close</button>
+  </div>
+</div>
+  </div>
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-menu">
+
+        <a href="dashboard.html" class="menu-item active">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="upload.html" class="menu-item">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>Upload Certificate</span>
+        </a>
+
+        <a href="upload_history.html" class="menu-item">
+            <i class="fas fa-history"></i>
+            <span>Upload History</span>
+        </a>
+
+        <a href="settings.html" class="menu-item">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+
+        <a href="review.html" class="menu-item" id="reviewLink" style="display: none;">
+            <i class="fas fa-check-double"></i>
+            <span>Review Certificates</span>
+        </a>
+
+        
+
+        <a href="help.html" class="menu-item">
+        <i class="fas fa-question-circle"></i>
+        <span>Help & Support</span>
+        </a>
+
+
+    </div>
+</aside>
+
+
+
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="welcome-section">
+                <h2><i class="fas fa-hand-wave"></i> Welcome back, <span id="welcomeName">User</span>!</h2>
+                <p class="welcome-message">Here's your certificate processing overview</p>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+
+    <div class="action-cards">
+
+        <!-- Upload Certificate -->
+        <a href="upload.html" class="action-card upload-action">
+            <div class="action-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <h4>Upload New Certificate</h4>
+            <p>Upload and process new certificates</p>
+        </a>
+
+        <!-- View Certificates -->
+        <a href="upload_history.html" class="action-card view-action">
+            <div class="action-icon">
+                <i class="fas fa-folder-open"></i>
+            </div>
+            <h4>View My Certificates</h4>
+            <p>Browse your uploaded certificates</p>
+        </a>
+
+        <!-- View Statistics -->
+        <a href="analytics.html" class="action-card stats-action">
+            <div class="action-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h4>View Statistics</h4>
+            <p>Check certificate analytics</p>
+        </a>
+
+        <!-- Help -->
+        <a href="help.html" class="action-card help-action">
+            <div class="action-icon">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <h4>Get Help</h4>
+            <p>Support for certificate upload</p>
+        </a>
+
+    </div>
+</div>
+
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="section-header">
+                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="activity-list" id="activityList">
+                    <!-- Dynamic content will be loaded here -->
+                    <div class="activity-item loading">
+                        <div class="activity-icon">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p>Loading activities...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate Status -->
+            <div class="status-section">
+                <h3><i class="fas fa-tasks"></i> Certificate Status Overview</h3>
+                <div class="status-cards">
+                    <div class="status-card pending">
+                        <div class="status-header">
+                            <i class="fas fa-clock"></i>
+                            <h4>Pending Review</h4>
+                        </div>
+                        <div class="status-count" id="pendingCards">0</div>
+                        <p>Awaiting admin verification</p>
+                    </div>
+                    
+                    <div class="status-card verified">
+                        <div class="status-header">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Verified</h4>
+                        </div>
+                        <div class="status-count" id="verifiedCards">0</div>
+                        <p>Successfully processed</p>
+                    </div>
+                    
+                    <div class="status-card rejected">
+                        <div class="status-header">
+                            <i class="fas fa-times-circle"></i>
+                            <h4>Rejected</h4>
+                        </div>
+                        <div class="status-count" id="rejectedCards">0</div>
+                        <p>Requires re-upload</p>
+                    </div>
+                    
+                    <div class="status-card processing">
+                        <div class="status-header">
+                            <i class="fas fa-cogs"></i>
+                            <h4>Processing</h4>
+                        </div>
+                        <div class="status-count" id="processingCards">0</div>
+                        <p>AI extraction in progress</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>const user = JSON.parse(sessionStorage.getItem("user"));
+   
+
+  const profileBtn = document.getElementById('profileBtn');
+  const profileModal = document.getElementById('profileModal');
+  const closeProfile = document.getElementById('closeProfile');
+
+  // Open modal
+  profileBtn.addEventListener('click', () => {
+    profileModal.style.display = 'flex';
+  });
+
+  // Close modal
+  closeProfile.addEventListener('click', () => {
+    profileModal.style.display = 'none';
+  });
+
+  // Optional: close when clicking outside the card
+  profileModal.addEventListener('click', (e) => {
+    if (e.target === profileModal) {
+      profileModal.style.display = 'none';
+    }
+  });
+
+  // Example: Populate dynamic user info from database
+  const userData = {
+    name: "Loading...",
+    usn: "Loading...",
+    email: "Loading...",
+    role: "Loading...",
+    dept: "Loading...",
+    program: "Loading...",
+    sem: "Loading...",
+    status: "Active"
+  };
+
+  document.getElementById('pName').textContent = userData.name;
+  document.getElementById('pUsn').textContent = userData.usn;
+  document.getElementById('pEmail').textContent = userData.email;
+  document.getElementById('pRole').textContent = userData.role;
+  document.getElementById('pDept').textContent = userData.dept;
+  document.getElementById('pProgram').textContent = userData.program;
+  document.getElementById('pSem').textContent = userData.sem;
+  document.getElementById('pStatus').textContent = userData.status;
+</script>
+    
+</body>
+</html>

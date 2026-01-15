@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics | NDU CERTILOG</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="nav-left">
+        <div class="logo">
+            <i class="fas fa-certificate"></i>
+            <h1>NDU <span>CERTILOG</span></h1>
+        </div>
+    </div>
+
+    <div class="nav-right">
+        <a href="dashboard.html" class="btn-secondary">
+            <i class="fas fa-arrow-left"></i> Dashboard
+        </a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <aside class="sidebar">
+        <div class="sidebar-menu">
+
+            <a href="dashboard.html" class="menu-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+
+            <a href="upload.html" class="menu-item">
+                <i class="fas fa-cloud-upload-alt"></i> Upload Certificate
+            </a>
+
+            <a href="upload_history.html" class="menu-item">
+                <i class="fas fa-history"></i> Upload History
+            </a>
+
+            <a href="settings.html" class="menu-item">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+
+            <a href="analytics.html" class="menu-item active">
+                <i class="fas fa-chart-bar"></i> Analytics
+            </a>
+
+            <a href="help.html" class="menu-item">
+                <i class="fas fa-question-circle"></i> Help & Support
+            </a>
+
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <h2 class="page-title">
+            <i class="fas fa-chart-bar"></i> Analytics
+        </h2>
+
+        <p class="page-subtitle">
+            Overview of your certificate activity
+        </p>
+
+        <div class="status-cards">
+
+            <div class="status-card verified">
+                <h4>Verified Certificates</h4>
+                <div class="status-count">✔</div>
+            </div>
+
+            <div class="status-card pending">
+                <h4>Pending Certificates</h4>
+                <div class="status-count">⏳</div>
+            </div>
+
+            <div class="status-card rejected">
+                <h4>Rejected Certificates</h4>
+                <div class="status-count">❌</div>
+            </div>
+
+        </div>
+
+        <p style="margin-top:20px;">
+            Detailed analytics integration coming in next version.
+        </p>
+
+    </main>
+</div>
+
+</body>
+</html>

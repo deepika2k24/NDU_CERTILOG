@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDU CERTILOG | Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="login-page">
+<div class="login-container">
+
+    <!-- LEFT SECTION -->
+    <div class="login-left">
+
+        <div class="logo-section">
+            <img src="assets/logo.jpeg" alt="NDU CertiLog Logo" class="logo-img">
+            <h1>NDU <span>CERTILOG</span></h1>
+            <p class="tagline">AI-Powered Certificate Processing System</p>
+        </div>
+
+        <div class="features">
+            <h3><i class="fas fa-robot"></i> Automated Data Extraction</h3>
+            <p>AI reads certificates and converts them into structured records</p>
+
+            <h3><i class="fas fa-bolt"></i> Workflow Automation</h3>
+            <p>No spreadsheets. No manual entry. Faster updates.</p>
+
+            <h3><i class="fas fa-shield-alt"></i> Role-Based Access</h3>
+            <p>Access controlled internally using institutional identity</p>
+        </div>
+    </div>
+
+    <!-- RIGHT SECTION -->
+    <div class="login-right">
+        <div class="login-form">
+            <h2>Sign In</h2>
+            <p class="login-subtitle">
+                Use your official university credentials
+            </p>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> College Email ID
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@ndu.edu"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password / DOB
+                    </label>
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="DDMMYYYY"
+                            required
+                        >
+                        <button type="button" class="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+
+                <p class="login-note">
+                    * Access level is determined automatically based on institutional role
+                </p>
+
+            </form>
+        </div>
+
+        <div class="login-footer">
+            <p>© 2025 – Team Techbytes, Nitte Deemed to be University</p>
+        </div>
+    </div>
+
+</div>
+
+<script >document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.getElementById("loginForm");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        // Basic validation
+        if (!email || !password) {
+            alert("Please enter valid credentials");
+            return;
+        }
+
+        // -------- ROLE INFERENCE (institution logic) --------
+        let role = "STUDENT";
+
+        if (email.startsWith("admin")) {
+            role = "ADMIN";
+        } else if (email.startsWith("faculty")) {
+            role = "FACULTY";
+        }
+
+        // -------- USER OBJECT (maps to DB row later) --------
+        const userSession = {
+            email: email,
+            role: role,
+            loginTime: new Date().toISOString()
+        };
+
+        // Temporary persistence (acts like DB/session)
+        localStorage.setItem("userSession", JSON.stringify(userSession));
+
+        // -------- REDIRECTION --------
+        window.location.href = "dashboard.html";
+    });
+
+});
+</script>
+</body>
+</html>

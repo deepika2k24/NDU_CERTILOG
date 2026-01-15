@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload History | NDU CERTILOG</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="history-page">
+
+    <!-- Top Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <i class="fas fa-certificate"></i>
+                <h1>NDU <span>CERTILOG</span></h1>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <a href="/frontend/dashboard.html" class="btn-secondary">
+                <i class="fas fa-arrow-left"></i> Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-menu">
+
+            <a href="dashboard.html" class="menu-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="upload.html" class="menu-item">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Upload Certificate</span>
+            </a>
+
+            <a href="upload_history.html" class="menu-item active">
+                <i class="fas fa-history"></i>
+                <span>Upload History</span>
+            </a>
+
+            <a href="settings.html" class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+
+            <a href="review.html" class="menu-item" id="reviewLink" style="display:none;">
+                <i class="fas fa-check-double"></i>
+                <span>Review Certificates</span>
+            </a>
+
+            
+
+            <a href="help.html" class="menu-item">
+            <i class="fas fa-question-circle"></i>
+            <span>Help & Support</span>
+            </a>
+
+
+        </div>
+    </aside>
+
+        <main class="main-content">
+
+            <h2 class="page-title">
+                <i class="fas fa-history"></i>
+                Upload History
+            </h2>
+
+            <p class="page-subtitle">
+                View all uploaded certificates and their verification status
+            </p>
+
+            <div class="table-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Certificate Name</th>
+                            <th>Authority</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Uploaded On</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="historyTableBody">
+                        <tr>
+                            <td colspan="5" style="text-align:center;">
+                                Loading upload history...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/upload_history.js"></script>
+</body>
+</html>

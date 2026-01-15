@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Certificate | NDU CERTILOG</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body class="upload-page">
+    <!-- Navigation (same as dashboard) -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <i class="fas fa-certificate"></i>
+                <h1>NDU <span>CERTILOG</span></h1>
+            </div>
+        </div>
+        
+        <div class="nav-center">
+            <div class="role-badge">
+                <i class="fas fa-user-tag"></i>
+                <span id="currentRole">Upload Certificate</span>
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=4A6FA5&color=fff" alt="User" class="avatar">
+                <div class="user-info">
+                    <strong id="userName">User</strong>
+                    <small id="userRole">Role</small>
+                </div>
+                <a href="dashboard.html" class="back-to-dashboard">
+                    <i class="fas fa-arrow-left"></i> Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Sidebar -->
+    <aside class="sidebar">
+    <div class="sidebar-menu">
+
+        <a href="dashboard.html" class="menu-item active">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="upload.html" class="menu-item">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>Upload Certificate</span>
+        </a>
+
+        <a href="upload_history.html" class="menu-item">
+            <i class="fas fa-history"></i>
+            <span>Upload History</span>
+        </a>
+
+        <a href="settings.html" class="menu-item">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+
+        <a href="review.html" class="menu-item" id="reviewLink" style="display: none;">
+            <i class="fas fa-check-double"></i>
+            <span>Review Certificates</span>
+        </a>
+
+        
+
+        <a href="help.html" class="menu-item">
+        <i class="fas fa-question-circle"></i>
+        <span>Help & Support</span>
+        </a>
+
+
+    </div>
+</aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="upload-header">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Upload New Certificate</h2>
+                <p class="subtitle">Upload your certificate image/PDF for AI-powered processing</p>
+            </div>
+
+            <div class="upload-container">
+                <!-- Upload Box -->
+                <div class="upload-box" id="uploadBox">
+                    <div class="upload-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <h3>Drag & Drop Certificate</h3>
+                    <p class="upload-info">Supported formats: JPG, PNG, PDF (Max: 10MB)</p>
+                    
+                    <input type="file" id="certificateFile" accept=".jpg,.jpeg,.png,.pdf" hidden>
+                    
+                    <button class="browse-btn" id="browseBtn">
+                        <i class="fas fa-folder-open"></i> Browse Files
+                    </button>
+                    
+                    <p class="or">OR</p>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <p>No file selected</p>
+                    </div>
+                    
+                    <div class="progress-container" id="progressContainer" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="progressText">0%</span>
+                            <span id="statusText">Uploading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate Details Form -->
+                <div class="details-form" id="detailsForm" style="display: none;">
+                    <h3><i class="fas fa-edit"></i> Verify Extracted Details</h3>
+                    <p class="form-subtitle">AI has extracted these details. Please verify and edit if needed.</p>
+                    
+                    <form id="certificateForm">
+
+    <!-- Row 1 -->
+    <div class="form-row">
+        <div class="form-group">
+            <label>Certificate Name</label>
+            <input type="text" id="certificateName" placeholder="Auto-detected">
+        </div>
+
+        <div class="form-group">
+            <label>
+                Recipient Name <span style="color:red">*</span>
+            </label>
+            <input
+                type="text"
+                id="recipientName"
+                name="recipient_name"
+                placeholder="Will be auto-filled from certificate"
+                autocomplete="off"
+            >
+            <small class="hint-text">
+                If not detected automatically, please enter manually.
+            </small>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="form-row">
+        <div class="form-group">
+            <label>Issuing Authority</label>
+            <input type="text" id="issuingAuthority" placeholder="Auto-detected">
+        </div>
+
+        <div class="form-group">
+            <label for="issueDate">
+                <i class="fas fa-calendar-alt"></i> Issue Date
+            </label>
+            <input type="date" id="issueDate" name="issueDate">
+        </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="form-row">
+        <div class="form-group">
+            <label for="certificateType">
+                <i class="fas fa-tag"></i> Certificate Type
+            </label>
+            <select id="certificateType" name="certificateType">
+                <option value="">Auto-detected</option>
+                <option value="achievement">Achievement</option>
+                <option value="participation">Participation</option>
+                <option value="workshop">Workshop / Training</option>
+                <option value="competition">Competition</option>
+                <option value="academic">Academic</option>
+                <option value="professional">Professional</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+        <label for="description">
+            <i class="fas fa-align-left"></i> Description
+        </label>
+        <textarea
+            id="description"
+            name="description"
+            rows="3"
+            placeholder="Auto-generated from certificate (editable)"
+        ></textarea>
+    </div>
+
+    <!-- Preview -->
+    <div class="preview-section">
+        <h4><i class="fas fa-image"></i> Certificate Preview</h4>
+        <div class="preview-container">
+            <img id="certificatePreview" src="" alt="Certificate Preview">
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+        <button type="button" class="btn-secondary" id="cancelBtn">
+            <i class="fas fa-times"></i> Cancel
+        </button>
+        <button type="submit" class="btn-primary" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Submit for Processing
+        </button>
+    </div>
+
+</form>
+
+
+    <script>document.addEventListener("DOMContentLoaded", () => {
+
+    // -------- SESSION GUARD --------
+    const session = JSON.parse(localStorage.getItem("userSession"));
+    if (!session) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    // Populate navbar info
+    document.getElementById("userName").innerText = session.email;
+    document.getElementById("userRole").innerText = session.role;
+
+    // -------- ELEMENTS --------
+    const uploadBox = document.getElementById("uploadBox");
+    const fileInput = document.getElementById("certificateFile");
+    const browseBtn = document.getElementById("browseBtn");
+    const fileInfo = document.getElementById("fileInfo");
+
+    const progressContainer = document.getElementById("progressContainer");
+    const progressFill = document.getElementById("progressFill");
+    const progressText = document.getElementById("progressText");
+    const statusText = document.getElementById("statusText");
+
+    const detailsForm = document.getElementById("detailsForm");
+    const certificatePreview = document.getElementById("certificatePreview");
+
+    // -------- FILE PICK --------
+    browseBtn.addEventListener("click", () => fileInput.click());
+
+    fileInput.addEventListener("change", handleFile);
+
+    function handleFile() {
+        const file = fileInput.files[0];
+        if (!file) return;
+
+        fileInfo.innerHTML = `<p><strong>${file.name}</strong> (${Math.round(file.size / 1024)} KB)</p>`;
+
+        startUploadSimulation(file);
+    }
+
+    // -------- UPLOAD + AI SIMULATION --------
+    function startUploadSimulation(file) {
+        progressContainer.style.display = "block";
+        let progress = 0;
+
+        const interval = setInterval(() => {
+            progress += 10;
+            progressFill.style.width = progress + "%";
+            progressText.innerText = progress + "%";
+
+            if (progress === 50) statusText.innerText = "Running AI OCR...";
+            if (progress === 80) statusText.innerText = "Extracting certificate data...";
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                statusText.innerText = "Extraction complete";
+
+                showExtractedData(file);
+            }
+        }, 300);
+    }
+
+    // -------- AUTO-FILL (AI RESULT MOCK) --------
+    function showExtractedData(file) {
+        detailsForm.style.display = "block";
+
+        // Preview
+        if (file.type.startsWith("image")) {
+            const reader = new FileReader();
+            reader.onload = e => certificatePreview.src = e.target.result;
+            reader.readAsDataURL(file);
+        }
+
+        // AI-extracted placeholders (generic & safe)
+        document.getElementById("certificateName").value = "Certificate of Achievement";
+        document.getElementById("issuingAuthority").value = "Institution / Organization";
+        document.getElementById("description").value =
+            "Certificate details auto-extracted using AI OCR and NLP pipeline.";
+
+        document.getElementById("certificateType").value = "achievement";
+    }
+
+    // -------- SUBMIT (STORE LOCALLY AS DB) --------
+    document.getElementById("certificateForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const record = {
+            email: session.email,
+            role: session.role,
+            certificateName: document.getElementById("certificateName").value,
+            recipientName: document.getElementById("recipientName").value,
+            issuingAuthority: document.getElementById("issuingAuthority").value,
+            issueDate: document.getElementById("issueDate").value,
+            certificateType: document.getElementById("certificateType").value,
+            description: document.getElementById("description").value,
+            timestamp: new Date().toISOString()
+        };
+
+        const existing = JSON.parse(localStorage.getItem("certificates")) || [];
+        existing.push(record);
+        localStorage.setItem("certificates", JSON.stringify(existing));
+
+        alert("Certificate successfully submitted for processing");
+
+        window.location.href = "upload_history.html";
+    });
+
+    // -------- CANCEL --------
+    document.getElementById("cancelBtn").addEventListener("click", () => {
+        window.location.href = "dashboard.html";
+    });
+
+});
+</script>
+
+</body>
+</html>

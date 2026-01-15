@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | NDU CERTILOG</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="settings-page">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <i class="fas fa-certificate"></i>
+                <h1>NDU <span>CERTILOG</span></h1>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <a href="dashboard.html" class="btn-secondary">
+                <i class="fas fa-arrow-left"></i> Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-menu">
+
+            <a href="dashboard.html" class="menu-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="upload.html" class="menu-item">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Upload Certificate</span>
+            </a>
+
+            <a href="upload_history.html" class="menu-item">
+                <i class="fas fa-history"></i>
+                <span>Upload History</span>
+            </a>
+
+            <a href="settings.html" class="menu-item active">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+
+            <a href="review.html" class="menu-item" id="reviewLink" style="display:none;">
+                <i class="fas fa-check-double"></i>
+                <span>Review Certificates</span>
+            </a>
+
+            
+
+            <a href="help.html" class="menu-item">
+            <i class="fas fa-question-circle"></i>
+            <span>Help & Support</span>
+            </a>
+
+
+        </div>
+    </aside>
+
+        <main class="main-content">
+
+            <h2 class="page-title">
+                <i class="fas fa-cog"></i>
+                Account Settings
+            </h2>
+
+            <p class="page-subtitle">
+                Manage your profile information
+            </p>
+
+            <div class="settings-card">
+                <form id="settingsForm">
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="fullName" placeholder="Your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Role</label>
+                        <input type="text" id="role" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="password" placeholder="Leave blank to keep same">
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+
+</body>
+</html>
